@@ -15,10 +15,14 @@ export default function App() {
   const episodes = seasons[selectedSeason] || [];
 
   useEffect(() => {
-    fetchShow().then((res) => {
-      setShow(res.data);
-      setSeasons(formatSeasons(res.data._embedded.episodes));
-    });
+    fetchShow()
+      .then((res) => {
+        setShow(res.data);
+        setSeasons(formatSeasons(res.data._embedded.episodes));
+      })
+      .catch((err) => {
+        return err;
+      });
   }, []);
 
   const handleSelect = (e) => {
